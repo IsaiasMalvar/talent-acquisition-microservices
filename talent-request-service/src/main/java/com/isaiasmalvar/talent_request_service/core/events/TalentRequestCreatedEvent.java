@@ -1,18 +1,20 @@
-package com.isaiasmalvar.talent_request_service.command.dto;
+package com.isaiasmalvar.talent_request_service.core.events;
 
 import com.isaiasmalvar.tam_core_api.domain.CandidateSkills;
 import com.isaiasmalvar.tam_core_api.domain.JobDescription;
+import com.isaiasmalvar.tam_core_api.domain.RequestStatus;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
 
 import java.time.LocalDate;
 
 @Data
-@NoArgsConstructor
-public class CreateTalentRequestCommandDTO {
+public class TalentRequestCreatedEvent {
+
+    private String talentRequestId;
     private String talentRequestTitle;
     private JobDescription jobDescription;
     private CandidateSkills candidateSkills;
+    private RequestStatus requestStatus;
     private LocalDate startDate;
-
 }
