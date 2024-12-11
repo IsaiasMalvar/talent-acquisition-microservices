@@ -25,8 +25,8 @@ public class TalentRequestService {
         try {
             commandGateway.sendAndWait(createTalentRequestCommand);
             TalentRequestResponseDTO talentRequestResponseDTO = new TalentRequestResponseDTO();
-            BeanUtils.copyProperties(createTalentRequestCommandDTO, talentRequestResponseDTO);
-
+            talentRequestResponseDTO.setTalentRequestID(createTalentRequestCommand.getTalentRequestId());
+            BeanUtils.copyProperties(createTalentRequestCommand, talentRequestResponseDTO);
             return new ResponseEntity<>(talentRequestResponseDTO, HttpStatus.CREATED);
         } catch (Exception exception) {
             var exceptionMessage = "Unable to create new Talent Request";
