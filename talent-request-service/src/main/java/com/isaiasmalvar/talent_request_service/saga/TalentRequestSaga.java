@@ -2,8 +2,11 @@ package com.isaiasmalvar.talent_request_service.saga;
 
 import com.isaiasmalvar.talent_request_service.core.events.TalentRequestCreatedEvent;
 import com.isaiasmalvar.tam_core_api.command.CreateTalentFulfillmentCommand;
+import com.isaiasmalvar.tam_core_api.command.UpdateTalentRequestStatusCommand;
+import com.isaiasmalvar.tam_core_api.event.TalentFulfillmentCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.axonframework.modelling.saga.EndSaga;
 import org.axonframework.modelling.saga.SagaEventHandler;
 import org.axonframework.modelling.saga.StartSaga;
 import org.axonframework.spring.stereotype.Saga;
@@ -33,5 +36,13 @@ public class TalentRequestSaga {
                 build();
 
         commandGateway.send(createTalentFulfillmentCommand);
+    }
+
+    @EndSaga
+    @SagaEventHandler(associationProperty = TALENT_REQUEST_ID)
+    public void  handle(TalentFulfillmentCreatedEvent talentFulfillmentCreatedEvent){
+        UpdateTalentRequestStatusCommand updateTalentRequestStatusCommand = UpdateTalentRequestStatusCommand.builder().talentRequestId(talentFulfillmentCreatedEvent.getTalentRequestId()).requestStatus(talentFulfillmentCreatedEvent.getRequestStatus()).build();
+
+        commandGateway.send(updateTalentRequestStatusCommand);
     }
 }
