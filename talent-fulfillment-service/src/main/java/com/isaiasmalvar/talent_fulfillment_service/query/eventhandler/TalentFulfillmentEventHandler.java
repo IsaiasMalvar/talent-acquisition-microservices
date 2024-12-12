@@ -8,11 +8,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TalentFullfillmentEventHandler {
+public class TalentFulfillmentEventHandler {
 
     private TalentFulfillmentRepository talentFulfillmentRepository;
 
-    public TalentFullfillmentEventHandler(TalentFulfillmentRepository talentFulfillmentRepository){
+    public TalentFulfillmentEventHandler(TalentFulfillmentRepository talentFulfillmentRepository){
         this.talentFulfillmentRepository = talentFulfillmentRepository;
     }
 
@@ -20,6 +20,7 @@ public class TalentFullfillmentEventHandler {
     public void on(TalentFulfillmentCreatedEvent talentFulfillmentCreatedEvent){
         TalentFulfillment talentFulfillment = new TalentFulfillment();
         BeanUtils.copyProperties(talentFulfillmentCreatedEvent, talentFulfillment);
+        talentFulfillment.setTalentFulfillmentId(talentFulfillmentCreatedEvent.getTalentFulfillmentId());
 
         talentFulfillmentRepository.save(talentFulfillment);
     }

@@ -36,6 +36,8 @@ public class TalentRequestAggregate {
         AggregateLifecycle.apply(talentRequestCreatedEvent);
     }
 
+
+
     @EventHandler
     public void on(TalentRequestCreatedEvent talentRequestCreatedEvent){
         this.talentRequestId = talentRequestCreatedEvent.getTalentRequestId();
