@@ -12,10 +12,8 @@ public class TalentRequestQueryResponseDTO {
 
     private String talentRequestId;
     private String talentRequestTitle;
-
     private JobDescription jobDescription;
     private CandidateSkills candidateSkills;
-
     private RequestStatus requestStatus;
     private LocalDate startDate;
 }
