@@ -1,5 +1,6 @@
 package com.isaiasmalvar.talent_fulfillment_service.query.eventhandler;
 
+import com.isaiasmalvar.talent_fulfillment_service.core.events.TalentFulfillmentDecisionSubmittedEvent;
 import com.isaiasmalvar.talent_fulfillment_service.query.repository.TalentFulfillment;
 import com.isaiasmalvar.talent_fulfillment_service.query.repository.TalentFulfillmentRepository;
 import com.isaiasmalvar.tam_core_api.event.TalentFulfillmentCreatedEvent;
@@ -24,4 +25,15 @@ public class TalentFulfillmentEventHandler {
 
         talentFulfillmentRepository.save(talentFulfillment);
     }
+
+    @EventHandler
+    public void on(TalentFulfillmentDecisionSubmittedEvent talentFulfillmentDecisionSubmittedEvent){
+        TalentFulfillment talentFulfillment = talentFulfillmentRepository.findById(talentFulfillmentDecisionSubmittedEvent.getTalentFulfillmentId()).get();
+        BeanUtils.copyProperties(talentFulfillmentDecisionSubmittedEvent, talentFulfillment);
+        talentFulfillment.setTalentFulfillmentId(talentFulfillmentDecisionSubmittedEvent.getTalentFulfillmentId());
+        talentFulfillmentRepository.save(talentFulfillment);
+
+    }
+
+
 }

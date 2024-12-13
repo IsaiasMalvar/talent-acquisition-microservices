@@ -1,5 +1,7 @@
 package com.isaiasmalvar.talent_fulfillment_service.command.aggregate;
 
+import com.isaiasmalvar.talent_fulfillment_service.command.command.SubmitTalentFulfillmentDecisionCommand;
+import com.isaiasmalvar.talent_fulfillment_service.core.events.TalentFulfillmentDecisionSubmittedEvent;
 import com.isaiasmalvar.tam_core_api.command.CreateTalentFulfillmentCommand;
 import com.isaiasmalvar.tam_core_api.domain.*;
 import com.isaiasmalvar.tam_core_api.event.TalentFulfillmentCreatedEvent;
@@ -50,5 +52,29 @@ public class TalentFulfillmentAggregate {
         jobDescription = talentFulfillmentCreatedEvent.getJobDescription();
         requestStatus = talentFulfillmentCreatedEvent.getRequestStatus();
         startDate = talentFulfillmentCreatedEvent.getStartDate();
+    }
+
+    @CommandHandler
+    public void handle(SubmitTalentFulfillmentDecisionCommand submitTalentFulfillmentDecisionCommand){
+        TalentFulfillmentDecisionSubmittedEvent talentFulfillmentDecisionSubmittedEvent = new TalentFulfillmentDecisionSubmittedEvent();
+
+        BeanUtils.copyProperties(submitTalentFulfillmentDecisionCommand, talentFulfillmentDecisionSubmittedEvent);
+
+        AggregateLifecycle.apply(talentFulfillmentDecisionSubmittedEvent);
+    }
+
+    @EventSourcingHandler
+    public void on(TalentFulfillmentDecisionSubmittedEvent talentFulfillmentDecisionSubmittedEvent){
+        talentFulfillmentId= talentFulfillmentDecisionSubmittedEvent.getTalentFulfillmentId();
+        jobPostId= talentFulfillmentDecisionSubmittedEvent.getJobPostId();
+        talentRequestId=talentFulfillmentDecisionSubmittedEvent.getTalentRequestId();
+        talentRequestTitle=talentFulfillmentDecisionSubmittedEvent.getTalentRequestTitle();
+        startDate=talentFulfillmentDecisionSubmittedEvent.getStartDate();
+
+        jobDescription=talentFulfillmentDecisionSubmittedEvent.getJobDescription();
+        candidateSkills=talentFulfillmentDecisionSubmittedEvent.getCandidateSkills();
+        requestStatus=talentFulfillmentDecisionSubmittedEvent.getRequestStatus();
+        roleLevel=talentFulfillmentDecisionSubmittedEvent.getRoleLevel();
+        employmentType=talentFulfillmentDecisionSubmittedEvent.getEmploymentType();
     }
 }
