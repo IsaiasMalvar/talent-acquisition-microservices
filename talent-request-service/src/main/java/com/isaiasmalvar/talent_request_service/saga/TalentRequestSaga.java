@@ -29,6 +29,7 @@ public class TalentRequestSaga {
         CreateTalentFulfillmentCommand createTalentFulfillmentCommand = CreateTalentFulfillmentCommand.builder().
                 talentFulfillmentId(UUID.randomUUID().toString()).
                 talentRequestId(talentRequestCreatedEvent.getTalentRequestId()).
+                talentRequestTitle(talentRequestCreatedEvent.getTalentRequestTitle()).
                 jobDescription(talentRequestCreatedEvent.getJobDescription()).
                 candidateSkills(talentRequestCreatedEvent.getCandidateSkills()).
                 requestStatus(talentRequestCreatedEvent.getRequestStatus()).

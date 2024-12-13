@@ -32,6 +32,7 @@ public class TalentFulfillmentService {
 
         if(submitTalentFulfillmentDecisionCommand.getRequestStatus().equals(RequestStatus.APPROVED)){
             submitTalentFulfillmentDecisionCommand.setJobPostId(UUID.randomUUID().toString());
+
             commandGateway.sendAndWait(submitTalentFulfillmentDecisionCommand);
             return new ResponseEntity(submitTalentFulfillmentDecisionCommand, HttpStatus.OK);
         }

@@ -22,7 +22,7 @@ public class TalentFulfillmentEventHandler {
         TalentFulfillment talentFulfillment = new TalentFulfillment();
         BeanUtils.copyProperties(talentFulfillmentCreatedEvent, talentFulfillment);
         talentFulfillment.setTalentFulfillmentId(talentFulfillmentCreatedEvent.getTalentFulfillmentId());
-
+        talentFulfillment.setTalentRequestTitle(talentFulfillmentCreatedEvent.getTalentRequestTitle());
         talentFulfillmentRepository.save(talentFulfillment);
     }
 
@@ -31,6 +31,7 @@ public class TalentFulfillmentEventHandler {
         TalentFulfillment talentFulfillment = talentFulfillmentRepository.findById(talentFulfillmentDecisionSubmittedEvent.getTalentFulfillmentId()).get();
         BeanUtils.copyProperties(talentFulfillmentDecisionSubmittedEvent, talentFulfillment);
         talentFulfillment.setTalentFulfillmentId(talentFulfillmentDecisionSubmittedEvent.getTalentFulfillmentId());
+
         talentFulfillmentRepository.save(talentFulfillment);
 
     }
