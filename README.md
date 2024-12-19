@@ -107,43 +107,40 @@ Before running the project, ensure the following are installed:
    ```
 
 5. Start the remaining microservices (e.g., Career Portal Service, Talent Request Service, Talent Fulfillment Service):
+   
    ```bash
    cd <career-portal-service>
    mvn spring-boot:run
    ```
-      ```bash
-   cd <career-portal-service>
-   mvn spring-boot:run
-   ```
-         ```bash
+   ```bash
    cd <talent-fulfillment-service>
    mvn spring-boot:run
    ```
-      ```bash
+   ```bash
    cd <talent-request-service>
    mvn spring-boot:run
    ```
 
-6. Start the API Gateway:
+7. Start the API Gateway:
    ```bash
    cd tams-api-gateway
    mvn spring-boot:run
    ```
 
-7. Verify that all services have registered with the Discovery Service and are accessible.
+8. Verify that all services have registered with the Discovery Service and are accessible.
 
 ---
 
 ## Folder Structure
 
 ```
-career-portal-macroproject
-├── api-gateway               # API Gateway service
+TAMS
+├── tams-api-gateway               # API Gateway service
 ├── discovery-service         # Eureka Discovery Service
 ├── career-portal-service     # Career Portal Service
 ├── talent-request-service    # Talent Request Service
 ├── talent-fulfillment-service# Talent Fulfillment Service
-├── shared-libraries          # Shared code modules (if applicable)
+├── tam-core-api             # Shared CQRS modules for saga/process management.
 └── README.md                 # Macroproject README
 ```
 
