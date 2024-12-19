@@ -1,6 +1,6 @@
 # Career Portal Macroproject
 
-This repository contains a macroproject composed of multiple microservices, including the **Career Portal Service**, **Talent Request Service**, **Talent Fulfillment Service**, API Gateway, and Discovery Service. The project leverages Spring Boot, Axon Framework, and Eureka for a distributed, scalable architecture. You must download the [back-end](https://github.com/IsaiasMalvar/talent-acquisition-microservices) implementation for this project to properly work.
+This repository contains a macroproject composed of multiple microservices, including the **Career Portal Service**, **Talent Request Service**, **Talent Fulfillment Service**, API Gateway, and Discovery Service. The project leverages Spring Boot, Axon Framework, and Eureka for a distributed, scalable architecture.
 
 ---
 
@@ -13,7 +13,6 @@ This repository contains a macroproject composed of multiple microservices, incl
 - [Getting Started](#getting-started)
 - [Folder Structure](#folder-structure)
 - [Running the Application](#running-the-application)
-
 
 ---
 
@@ -90,7 +89,7 @@ Before running the project, ensure the following are installed:
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/IsaiasMalvar/talent-acquisition-microservices.git
    cd career-portal-macroproject
    ```
 
@@ -99,21 +98,39 @@ Before running the project, ensure the following are installed:
    mvn clean install
    ```
 
-3. Start the Discovery Service:
+3. Start Axon Server as described in the [Prerequisites](#prerequisites).
+
+4. Start the Discovery Service:
    ```bash
-   cd discovery-service
+   cd tams-discovery-service
    mvn spring-boot:run
    ```
 
-4. Start Axon Server as described in the [Prerequisites](#prerequisites).
-
-5. Start the remaining microservices (e.g., Career Portal Service, Talent Request Service, Talent Fulfillment Service, API Gateway):
+5. Start the remaining microservices (e.g., Career Portal Service, Talent Request Service, Talent Fulfillment Service):
    ```bash
-   cd <microservice-folder>
+   cd <career-portal-service>
+   mvn spring-boot:run
+   ```
+      ```bash
+   cd <career-portal-service>
+   mvn spring-boot:run
+   ```
+         ```bash
+   cd <talent-fulfillment-service>
+   mvn spring-boot:run
+   ```
+      ```bash
+   cd <talent-request-service>
    mvn spring-boot:run
    ```
 
-6. Verify that all services have registered with the Discovery Service and are accessible.
+6. Start the API Gateway:
+   ```bash
+   cd tams-api-gateway
+   mvn spring-boot:run
+   ```
+
+7. Verify that all services have registered with the Discovery Service and are accessible.
 
 ---
 
@@ -134,20 +151,21 @@ career-portal-macroproject
 
 ## Running the Application
 
-1. **Start the Discovery Service**: Launch the Eureka Discovery Service first to allow all other services to register.
+1. **Start Axon Server**: Ensure Axon Server is running in the background for event storage and messaging.
 
-2. **Start Axon Server**: Ensure Axon Server is running in the background for event storage and messaging.
+2. **Start the Discovery Service**: Launch the Eureka Discovery Service to allow all other services to register.
 
-3. **Start Microservices**: Launch the individual services (e.g., API Gateway, Career Portal Service, Talent Request Service, Talent Fulfillment Service) one by one.
+3. **Start Microservices**: Launch the individual services (e.g., Career Portal Service, Talent Request Service, Talent Fulfillment Service) one by one.
 
-4. **Access the Application**:
+4. **Start the API Gateway**: Finally, launch the API Gateway.
+
+5. **Access the Application**:
    - API Gateway will be accessible at `http://localhost:8080` (default port).
    - Each service will have its own base URL, as registered with Eureka.
 
-5. **Test Communication**:
+6. **Test Communication**:
    - Use tools like Postman or curl to send requests through the API Gateway.
    - Verify event handling via Axon Server's dashboard at `http://localhost:8024`.
 
 ---
-
 
