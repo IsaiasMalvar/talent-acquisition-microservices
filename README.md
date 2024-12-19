@@ -1,6 +1,6 @@
 # Career Portal Macroproject
 
-This repository contains a macroproject composed of multiple microservices, including the **Career Portal Service**, **Talent Request Service**, **Talent Fulfillment Service**, API Gateway, and Discovery Service. The project leverages Spring Boot, Axon Framework, and Eureka for a distributed, scalable architecture.
+This repository contains a macroproject composed of multiple microservices, including the **Career Portal Service**, **Talent Request Service**, **Talent Fulfillment Service**, API Gateway, and Discovery Service. The project leverages Spring Boot, Axon Framework, and Eureka for a distributed, scalable architecture. You must download the [back-end](https://github.com/IsaiasMalvar/talent-acquisition-microservices) implementation for this project to properly work.
 
 ---
 
